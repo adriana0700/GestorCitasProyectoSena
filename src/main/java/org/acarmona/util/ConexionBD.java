@@ -8,7 +8,7 @@ public class ConexionBD {
 
     private static String url = "jdbc:mysql://localhost:3306/java_curso?serverTimezone=UTC";
     private static String username = "root";
-    private static String password = "0000";
+    private static String password = "root";
     //private static Connection conexion;
 
     public static Connection getConnection() throws SQLException {

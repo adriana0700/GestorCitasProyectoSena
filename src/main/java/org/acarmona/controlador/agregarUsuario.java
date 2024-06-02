@@ -1,3 +1,5 @@
+package org.acarmona.controlador;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,11 +10,12 @@ import org.acarmona.servicios.UsuarioService;
 import org.acarmona.servicios.UsuarioServiceJdbc;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 @WebServlet("/usuario/agregar")
-public class AgregarUsuario extends HttpServlet {
+public class agregarUsuario extends HttpServlet {
 
     private UsuarioService usuarioService;
 
@@ -28,20 +31,10 @@ public class AgregarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Extraer los datos del nuevo usuario desde la solicitud
         String nombre = req.getParameter("nombre");
-        String edadStr = req.getParameter("edad");
+        int edad = Integer.parseInt(req.getParameter("edad"));
         String tipoDocumento = req.getParameter("tipoDocumento");
         String numeroDocumento = req.getParameter("numeroDocumento");
         String fechaCita = req.getParameter("fechaCita");
-
-        int edad = 0;
-        if (edadStr != null && !edadStr.isEmpty()) {
-            try {
-                edad = Integer.parseInt(edadStr);
-            } catch (NumberFormatException e) {
-                // Manejo del error si la edad no es un número válido
-                e.printStackTrace();
-            }
-        }
 
         // Crear una nueva instancia de Usuario
         Usuario usuario = new Usuario();
@@ -52,13 +45,19 @@ public class AgregarUsuario extends HttpServlet {
         usuario.setFechaCita(fechaCita);
 
         // Guardar el nuevo usuario usando el servicio
+        resp.setContentType("text/html");
+        PrintWriter out =  resp.getWriter();
+        out.println("<html><head><title>Registro Exitoso</title></head><body>");
+        // Guardar el nuevo usuario usando el servicio
         try {
             usuarioService.guardar(usuario);
-            resp.sendRedirect(req.getContextPath() + "/usuario/ver");
+            out.println("<h1>¡Cita agendada exitosamente!</h1>");
+            out.println("<p>La cita para " + nombre + " ha sido agendada correctamente.</p>");
         } catch (SQLException e) {
             e.printStackTrace();
             // Manejar la excepción adecuadamente
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al agregar usuario.");
+            out.println("<h1>Error</h1>");
+            out.println("<p>Ha ocurrido un error al agendar la cita.</p>");
         }
     }
 }

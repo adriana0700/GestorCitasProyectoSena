@@ -1,0 +1,527 @@
+/*fuentes
+*/
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lato&display=swap');
+*,
+*:before,
+*:after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    background-color: #E0FFFF;
+
+    /*
+    * Margin 0 y padding 0 quita todos los márgenes por defecto que tienen los d¡navegadores
+    * box-sizing: border-box hace que en el cálculo del tamañano de los elementos incluya el margen y el padding y no solo el contenido
+    *
+    */
+}
+
+/***************
+Tipografía
+***************/
+.titulo{
+    font-family: 'Anton', sans-serif;
+    color: #244B5E;
+    font-size: 1.2rem;
+}
+.titulo, .parrafo-header-texto, .h1-header-texto{
+    font-family: 'Anton', sans-serif;
+}
+.parrafo-header-texto{
+    font-size: 1.5rem;
+    color: #53AEDB;
+    text-shadow: 0.1em 0.1em 0.2em rgba(12, 12, 12, 0.925);
+}
+
+ nav a{
+    color: #50585C
+}
+.h1-header-texto{
+    color:white;
+    font-size: 2rem;
+}
+h1{
+    font-size: 1.2rem;
+    font-weight: 700;
+
+}
+.contenedor-footer h1{
+    color: #53AEDB;
+}
+
+a{
+    font-size: .85rem ;
+    color: #95D5F5;
+    text-decoration: none;
+}
+p{
+    color: #244B5E;
+}
+small, small a{
+    font-size: .50rem;
+}
+.volver a{
+    font-weight: 700;
+    font-size: .9rem;
+}
+
+/*******************
+ Header
+ ********************/
+
+.custom-shape-divider-bottom-1633077270 { /* efecto de olas en la imagen del background. Requiere que el contenedor donde está ubicado sea relativo*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1633077270 svg {
+    position: relative;
+    display: block;
+    width: calc(150% + 1.2px);
+    height: 100px;
+    z-index: -1;
+}
+
+.custom-shape-divider-bottom-1633077270 .shape-fill {
+    fill: #53AEDB;
+}
+
+header{
+    position: relative;
+
+
+}
+.wrap-header{
+    display:flex;
+    flex-direction: column;
+    background-color: #95D5F5;
+    padding-bottom:.5em ;
+    z-index:-1;
+    background-image: url('https://jaikupsicologiavirtual.com/wp-content/uploads/2021/03/sofa_2.gif');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+}
+@media (min-width: 600px) {
+    header, .wrap-header{
+        min-height: 100vh;
+
+    }
+    .custom-shape-divider-bottom-1633077270 svg{
+        width: calc(130% + 1.2px);
+        height: 350px;
+    }
+    .titulo{
+        font-size: 2.5em;
+    }
+    .header-texto a{
+        font-size: 2em;
+    }
+
+}
+.header-titulo{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+    justify-content: space-between;
+    margin-left:0;
+    padding-bottom: 0;
+    z-index: 900;
+
+}
+nav{
+    text-align: center;
+
+}
+nav ul{
+    display: flex;
+    flex-direction: column;
+    margin:0;
+    padding: 0;
+    justify-content: center;
+
+}
+nav li{
+    list-style:none;
+}
+
+nav a{
+    text-decoration: none;
+    font-weight: 700;
+    padding: .24em 0;
+}
+
+.header-titulo-nombre{
+    display: flex;
+}
+.cont-img{
+    padding-top: .5em;
+    padding-right: .5em;
+}
+.img_logo{
+   min-width:6vh;
+}
+
+@media (min-width: 600px){
+    .header-titulo{
+        flex-direction: row;
+        text-align: center;
+
+    }
+    .header-titulo-nombre .img_logo{
+        align-self: flex-start;
+        padding-top: .5em;
+
+    }
+    .header-titulo-nombre h1{
+
+        font-size: 1.7rem;
+
+    }
+    nav ul{
+        flex-direction: row;
+        align-items: center;
+        margin: 1em;
+
+
+    }
+    nav li{
+        margin-left: 1em;
+    }
+    .nav a{
+        padding: 0 .24em;
+        margin: 10em;
+    }
+}
+
+.header-texto{
+    width: 100%;
+    z-index:2 ;
+}
+.contenedor{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    z-index: 1;
+
+
+}
+
+.parrafo-header-texto{
+    border-left: 3px solid burlywood;
+    margin-top:4em;
+    margin-bottom: 0;
+    padding-left: .5em;
+}
+.h1-header-texto{
+    margin-top:0;
+    padding-left: .5em;
+    color: #d85454;
+    text-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.788);
+}
+.header-texto a{
+    background-color: #244B5E;
+    border-radius: 5px;
+    margin-bottom:1.5em;
+    margin-left: 3em;
+    padding: .5em;
+    box-shadow: 0 0 15px rgba(14, 24, 34, 0.918);
+
+
+}
+.header-texto a:hover{
+    opacity: 0.8;
+}
+@media(min-width: 600px){
+    .contenedor, .header-titulo{
+        max-width: 1200px;
+    }
+
+    .parrafo-header-texto{
+        margin-top: .2em;
+        font-size: 4em;
+
+      }
+      .h1-header-texto{
+        font-size: 7em;
+        margin-bottom: .2em;
+
+
+    }
+    .header-texto a{
+        margin-left: 5em;
+    }
+}
+@media(min-width: 800px){
+    .parrafo-header-texto{
+        margin-top: .7em;
+        font-size: 4em;
+
+      }
+      .h1-header-texto{
+        font-size: 7em;
+        margin-bottom: .5em;
+
+
+    }
+    .header-texto a{
+        margin-left: 10em;
+    }
+}
+@media (min-width: 1200px){
+    .parrafo-header-texto{
+        margin-top: 1em;
+    }
+    .header-texto a{
+
+        margin-left: 20em;
+    }
+}
+
+/**********
+main
+************/
+
+
+.contenedor-main{
+    background-color: #53AEDB;
+    z-index:5;
+}
+.contenedor-main h1{
+    text-align:right ;
+}
+.psicologos{
+    width: 100% ;
+}
+.volver{
+
+    align-self: flex-end;
+    padding-bottom: .5em;
+    border: brown 1px solid;
+}
+
+
+  /***************************
+  características del servicio
+  *****************************/
+
+.caracteristicas-columna{
+    background-color: rgba(255, 255, 255, 0.514);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: rgb(66, 65, 65);
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(8,7,16,0.6);
+    text-align: center;
+    padding: .4em;
+    margin-bottom: 1em;
+}
+.img-caracteristicas{
+    width: 100%;
+    max-width: 20vw;
+}
+
+@media (min-width: 600px){
+    .titulo-widget{
+        font-size: 1.2em;
+    }
+    .seccion-quienes-somos{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1em;
+
+    }
+
+    .quienes-somos{
+        width: 45%;
+
+
+    }
+    .quienes-parrafo{
+        display: flex;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 3em  2em  3em 0 ;
+        border-right: burlywood 3px solid;
+
+    }
+    .quienes-imagen {
+        margin-left: 1em;
+    }
+    .contenedor-main h1{
+        text-align:center ;
+    }
+
+    .titulo-main{
+        width: 100%;
+        text-align: center;
+        margin: 1em;
+    }
+    .caracteristicas-servicio{
+       display: flex;
+       justify-content: space-between;
+       align-items: stretch;
+       margin: 0;
+
+    }
+    .caracteristicas-columna{
+        width: 25%;
+        padding: 1em;
+        margin-bottom: 2em;
+        min-height: 5em;
+    }
+    .img-caracteristicas{
+        max-width: 5vw;
+    }
+}
+
+/***************
+Formulario
+****************/
+.contenedor-registro{
+
+}
+
+.contenedor-form{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+
+}
+form{
+    margin-top: .5em;
+    margin-bottom: .5em;
+    padding: .2em;
+    background-color: rgba(255, 255, 255, 0.479);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+}
+form *{
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form input{
+    width:100%;
+    border-radius: 8px;
+    outline: none;
+    border: 2px solid #c4c4c4;
+    padding:.5em;
+    background-color: rgba(255,255,255,0.07);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+form h3{
+    text-align: center;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form div {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+input:focus {
+border: 2px solid;
+}
+#btn-submit-form{
+    margin-top: 15px;
+    margin-bottom: .5em;
+    width: 100%;
+    padding: .5em;
+    background-color: #244B5E;
+    border: none;
+    color: #53AEDB;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
+
+}
+#btn-submit-form:hover{
+    opacity: 0.8;
+}
+
+.error{
+    color: red;
+}
+
+@media (min-width: 600px){
+    .contenedor-form{
+
+        max-width: 900px;
+    }
+}
+/*****************
+Footer
+******************/
+
+footer h1{
+    padding-bottom: .5em ;
+    border-bottom: 3px solid burlywood;
+}
+.contenedor-footer{
+    text-align: center;
+    align-items: center;
+
+}
+.img-redes{
+    width: 100%;
+    min-width: 70px;
+    padding: 1em;
+}
+.cont-img-redes{
+    margin-top: 1em;
+    display: flex;
+
+}
+/******
+login
+*********/
+.cont-login{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.captcha{
+    display: flex;
+    justify-content:space-between ;
+}
+
+#captcha{
+    width: 25%;
+    margin-left: .5em;
+}
+
+
+.cont-login form{
+    z-index: 900;
+}
+.shape-login svg{
+    width: calc(180% + 2px);
+    height: 600px;
+
+}
