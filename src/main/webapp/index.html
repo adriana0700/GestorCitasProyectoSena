@@ -60,7 +60,7 @@
     <div class="contenedor-main">
         <main id="main" role="main" class="contenedor">
             <div>
-                <h1 class="titulo">¿QUIENES SOMOS?</h1>
+                <h1 class="titulo">¿QUIÉNES SOMOS?</h1>
             </div>
 
             <article class="seccion-quienes-somos">
@@ -112,33 +112,33 @@
     <!--Formulario-->
     <section class="contenedor-registro">
         <div class="contenedor">
-            <form action="usuario/agregar" id="form-registro" method="POST">
+            <form action="/Modulo1GestionCitas/agregar" id="form-registro" method="POST">
                 <div>
                     <label for=><h3>Agenda Tu Cita</h3> </label>
                 </div>
                 <div>
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" class="campo" required minlength="4" maxlength="30">
+                    <input type="text" id="nombre" name="nombre" class="campo" required minlength="4" maxlength="30" pattern="[A-Za-z\s]+">
                     <div class="error"></div>
                 </div>
                 <div>
                     <label for="edad">Edad</label>
-                    <input type="text" id="edad" class="campo" required minlength="1" maxlength="2">
+                    <input type="number" id="edad" name="edad" class="campo" required minlength="1" maxlength="2" pattern="\d+">
                     <div class="error"></div>
                 </div>
                 <div>
-                    <label for="tipo">Tipo de Documento</label>
-                    <input type="text" id="tipo" class="campo" required minlength="2" maxlength="7">
+                    <label for="tipoDocumento">Tipo de Documento</label>
+                    <input type="text" id="tipoDocumento" name="tipoDocumento" class="campo" required minlength="2" maxlength="7" pattern="[A-Za-z\s]+">
                     <div class="error"></div>
                 </div>
                 <div>
-                    <label for="documento">No.Documento</label>
-                    <input type="text" id="documento" name="documento" class="campo">
+                    <label for="numeroDocumento">No.Documento</label>
+                    <input type="text" id="numeroDocumento" name="numeroDocumento" class="campo" required pattern="\d+">
                     <div class="error"></div>
                 </div>
                 <div>
-                    <label for="fecha">Indique la fecha y horae en la que desea ser atendido</label>
-                    <input type="text" id="fecha" class="campo" required minlength="2">
+                    <label for="fechaCita">Indique la fecha y hora en la que desea ser atendido</label>
+                    <input type="text" id="fechaCita" name="fechaCita" class="campo" required>
                     <div class="error"></div>
                 </div>
                 <input type="submit" id="btn-submit-form" value="Enviar" class="enviar">
@@ -175,6 +175,6 @@
 
     </footer>
 </div>
-<script src="form.js"></script>
+
 </body>
 </html>

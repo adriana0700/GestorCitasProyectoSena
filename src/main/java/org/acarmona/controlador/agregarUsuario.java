@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.acarmona.modelo.Usuario;
-import org.acarmona.servicios.UsuarioService;
 import org.acarmona.servicios.UsuarioServiceJdbc;
 
 import java.io.IOException;
@@ -14,24 +13,29 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/usuario/agregar")
+@WebServlet("/agregar")
 public class agregarUsuario extends HttpServlet {
-
-    private UsuarioService usuarioService;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        // Inicializar el servicio de usuario
-        Connection conn = (Connection) getServletContext().getAttribute("conn");
-        usuarioService = new UsuarioServiceJdbc(conn);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Obtener la conexión del atributo de la solicitud
+        Connection conn = (Connection) req.getAttribute("conn");
+        if (conn == null) {
+            throw new ServletException("La conexión a la base de datos no está disponible");
+        }
+
+        // Inicializar el servicio de usuario con la conexión obtenida
+        UsuarioServiceJdbc usuarioService = new UsuarioServiceJdbc(conn);
+
         // Extraer los datos del nuevo usuario desde la solicitud
         String nombre = req.getParameter("nombre");
-        int edad = Integer.parseInt(req.getParameter("edad"));
+        String edadParam = req.getParameter("edad");
+
+        // Valor predeterminado en caso de que "edadParam" sea nulo
+        int edad = 0;
+        if (edadParam != null && !edadParam.isEmpty()) {
+            edad = Integer.parseInt(edadParam);
+        }
         String tipoDocumento = req.getParameter("tipoDocumento");
         String numeroDocumento = req.getParameter("numeroDocumento");
         String fechaCita = req.getParameter("fechaCita");
@@ -46,18 +50,21 @@ public class agregarUsuario extends HttpServlet {
 
         // Guardar el nuevo usuario usando el servicio
         resp.setContentType("text/html");
-        PrintWriter out =  resp.getWriter();
-        out.println("<html><head><title>Registro Exitoso</title></head><body>");
-        // Guardar el nuevo usuario usando el servicio
+        PrintWriter out = resp.getWriter();
+
         try {
             usuarioService.guardar(usuario);
+            out.println("<html><head><title>Registro Exitoso</title></head><body>");
             out.println("<h1>¡Cita agendada exitosamente!</h1>");
             out.println("<p>La cita para " + nombre + " ha sido agendada correctamente.</p>");
         } catch (SQLException e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
+            out.println("<html><head><title>Error</title></head><body>");
             out.println("<h1>Error</h1>");
             out.println("<p>Ha ocurrido un error al agendar la cita.</p>");
+        } finally {
+            out.println("</body></html>");
+            out.close();
         }
     }
 }
