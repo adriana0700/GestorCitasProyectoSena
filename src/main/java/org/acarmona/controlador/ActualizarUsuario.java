@@ -1,63 +1,61 @@
 package org.acarmona.controlador;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.acarmona.modelo.Usuario;
-import org.acarmona.servicios.UsuarioService;
-import org.acarmona.servicios.UsuarioServiceJdbc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
 
-@WebServlet("actualizar")
-public class ActualizarUsuario extends HttpServlet {
 
-    private UsuarioService usuarioService;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        // Inicializar el servicio de usuario
-        Connection conn = (Connection) getServletContext().getAttribute("conn");
-        usuarioService = new UsuarioServiceJdbc(conn);
-    }
-
+@WebServlet("/usuario/actualizar")
+public class ActualizarUsuario extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Extraer los datos del nuevo usuario desde la solicitud
-        String nombre = req.getParameter("nombre");
-        int edad = Integer.parseInt(req.getParameter("edad"));
-        String tipoDocumento = req.getParameter("tipoDocumento");
-        String numeroDocumento = req.getParameter("numeroDocumento");
-        String fechaCita = req.getParameter("fechaCita");
-
-        // Crear una nueva instancia de Usuario
-        Usuario usuario = new Usuario();
-        usuario.setNombre(nombre);
-        usuario.setEdad(edad);
-        usuario.setTipoDocumento(tipoDocumento);
-        usuario.setNumeroDocumento(numeroDocumento);
-        usuario.setFechaCita(fechaCita);
-
-        // Guardar el nuevo usuario usando el servicio
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<html><head><title>Registro Exitoso</title></head><body>");
-        try {
-            usuarioService.guardar(usuario);
-            out.println("<h1>¡Cita agendada exitosamente!</h1>");
-            out.println("<p>La cita para " + nombre + " ha sido agendada correctamente.</p>");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Manejar la excepción adecuadamente
-            out.println("<h1>Error</h1>");
-            out.println("<p>Ha ocurrido un error al agendar la cita.</p>");
+        HttpSession session = req.getSession();
+        if (session.getAttribute("usuario") != null) {
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            updateUsuario(req, usuario);
         }
 
+        resp.sendRedirect(req.getContextPath() + "/usuario/ver");
+    }
+
+    private void updateUsuario(HttpServletRequest request, Usuario usuario) {
+        String nombre = request.getParameter("nombre");
+        String edadStr = request.getParameter("edad");
+        String tipoDocumento = request.getParameter("tipoDocumento");
+        String numeroDocumento = request.getParameter("numeroDocumento");
+        String fechaCita = request.getParameter("fechaCita");
+
+        if (nombre != null && !nombre.isEmpty()) {
+            usuario.setNombre(nombre);
+        }
+
+        if (edadStr != null && !edadStr.isEmpty()) {
+            try {
+                int edad = Integer.parseInt(edadStr);
+                usuario.setEdad(edad);
+            } catch (NumberFormatException e) {
+                // Manejo del error si la edad no es un número válido
+                e.printStackTrace();
+            }
+        }
+
+        if (tipoDocumento != null && !tipoDocumento.isEmpty()) {
+            usuario.setTipoDocumento(tipoDocumento);
+        }
+
+        if (numeroDocumento != null && !numeroDocumento.isEmpty()) {
+            usuario.setNumeroDocumento(numeroDocumento);
+        }
+
+        if (fechaCita != null && !fechaCita.isEmpty()) {
+            usuario.setFechaCita(fechaCita);
+        }
     }
 }
+
+

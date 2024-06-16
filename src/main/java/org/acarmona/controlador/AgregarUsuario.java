@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @WebServlet("/agregar")
-public class agregarUsuario extends HttpServlet {
+public class AgregarUsuario extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
