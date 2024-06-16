@@ -10,7 +10,7 @@ import org.acarmona.modelo.Usuario;
 import java.io.IOException;
 
 
-@WebServlet("/usuario/actualizar")
+@WebServlet("/actualizar")
 public class ActualizarUsuario extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

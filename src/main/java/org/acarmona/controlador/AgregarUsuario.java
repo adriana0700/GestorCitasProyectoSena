@@ -49,19 +49,26 @@ public class AgregarUsuario extends HttpServlet {
         usuario.setFechaCita(fechaCita);
 
         // Guardar el nuevo usuario usando el servicio
-        resp.setContentType("text/html");
+
+        resp.setContentType("application/json");
+
         PrintWriter out = resp.getWriter();
 
         try {
             usuarioService.guardar(usuario);
-            out.println("<html><head><title>Registro Exitoso</title></head><body>");
-            out.println("<h1>¡Cita agendada exitosamente!</h1>");
-            out.println("<p>La cita para " + nombre + " ha sido agendada correctamente.</p>");
+
+            out.println("{");
+            out.println("\"status\": \"Registro Exitoso\",");
+            out.println("\"message\": \"¡Cita agendada exitosamente!\"");
+            out.println("}");
+
         } catch (SQLException e) {
             e.printStackTrace();
-            out.println("<html><head><title>Error</title></head><body>");
-            out.println("<h1>Error</h1>");
-            out.println("<p>Ha ocurrido un error al agendar la cita.</p>");
+            out.println("{");
+            out.println("\"status\": \"Error\",");
+            out.println("\"message\": \"¡No se pudo agendar la cita!\"");
+            out.println("}");
+
         } finally {
             out.println("</body></html>");
             out.close();
